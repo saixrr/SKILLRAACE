@@ -1,0 +1,25 @@
+/* Custom CSS for the landing page */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    background-image: url('https://img.freepik.com/free-photo/business-brainstorming-graph-chart-report-data-concept_53876-31213.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1721433600&semt=sph');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+  }
+  
+  .about img {
+    border-radius: 10px;
+  }
+  
+  .services h3 {
+    margin-top: 20px;
+  }
+  
+  .footer {
+    margin-top: 50px;
+  }
+  
