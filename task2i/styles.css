@@ -1,0 +1,51 @@
+/* Custom CSS for the landing page */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: system-ui;
+  }
+  
+  .navbar {
+    margin-bottom: 0;
+  }
+  
+  .hero-section {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3jn9XS9tfirTy4Z18PXSj01OyC8RYy4ujbg&s'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 100vh;
+    color: #fff;
+  }
+  
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay effect */
+    z-index: 1;
+  }
+  
+  .hero-section .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero-section .display-4 {
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .hero-section .lead {
+    margin-bottom: 40px;
+  }
+  
+  .hero-section .btn {
+    padding: 10px 20px;
+    font-size: 1.25rem;
+  }
+  
