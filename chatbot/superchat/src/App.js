@@ -1,6 +1,7 @@
 // src/App.js
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useRef } from 'react';
-import './App.css'
+import './App.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { auth, firestore, GoogleAuthProvider, signInWithPopup, signOut, collection, query, orderBy, limit, addDoc, serverTimestamp } from './firebase';
@@ -9,10 +10,10 @@ function App() {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="App">
-      <header>
+    <div className="App container mt-5">
+      <header className="d-flex justify-content-between align-items-center mb-4">
         <h1>Chat App</h1>
-        <SignOut/>
+        {user && <SignOut />}
       </header>
       <section>
         {user ? <ChatRoom /> : <SignIn />}
@@ -32,13 +33,19 @@ function SignIn() {
   };
 
   return (
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
+    <button className="btn btn-primary btn-lg" onClick={signInWithGoogle}>
+      Sign in with Google
+    </button>
   );
 }
 
 function SignOut() {
-  return auth.currentUser && (
-    <button onClick={() => signOut(auth)}>Sign Out</button>
+  return (
+    auth.currentUser && (
+      <button className="btn btn-danger" onClick={() => signOut(auth)}>
+        Sign Out
+      </button>
+    )
   );
 }
 
@@ -57,7 +64,7 @@ function ChatRoom() {
         text: formValue,
         createdAt: serverTimestamp(),
         uid,
-        photoURL
+        photoURL,
       });
       setFormValue('');
       dummy.current.scrollIntoView({ behavior: 'smooth' });
@@ -68,15 +75,21 @@ function ChatRoom() {
 
   return (
     <>
-      <div>
-        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+      <div className="chat-messages mb-4">
+        {messages && messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
         <div ref={dummy}></div>
       </div>
-      <form onSubmit={sendMessage}>
-        <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
-        <button type='submit'>Send</button>
+      <form onSubmit={sendMessage} className="input-group">
+        <input
+          className="form-control"
+          value={formValue}
+          onChange={(e) => setFormValue(e.target.value)}
+          placeholder="Type a message..."
+        />
+        <button className="btn btn-primary" type="submit">
+          Send
+        </button>
       </form>
-      <SignOut />
     </>
   );
 }
@@ -86,13 +99,18 @@ function ChatMessage(props) {
 
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
-  return (<>
-    <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-      <p>{text}</p>
+  return (
+    <div className={`message ${messageClass} mb-3 d-flex align-items-start`}>
+      <img
+        src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'}
+        className="rounded-circle me-2"
+        alt="User Avatar"
+        width="40"
+        height="40"
+      />
+      <p className="bg-light p-3 rounded">{text}</p>
     </div>
-  </>)
+  );
 }
-
 
 export default App;
