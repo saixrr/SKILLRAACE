@@ -27,7 +27,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem('authToken', mockData.auth_token);
       localStorage.setItem('userData', JSON.stringify(mockData.user));
 
-      navigate('/account/dashboard');
+      
     } else {
       // Simulate sign-in failure
       console.error('Sign-in failed: Invalid credentials');

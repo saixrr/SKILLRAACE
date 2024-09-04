@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -10,9 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Define a one-to-one relationship with ProductImage
+      Product.hasOne(models.ProductImage, {
+        foreignKey: 'product_id',
+        as: 'image' // Alias to use in queries
+      });
     }
   }
+  
   Product.init({
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
@@ -25,5 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Product',
   });
+  
   return Product;
 };
